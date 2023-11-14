@@ -1,6 +1,8 @@
 ## AI 健身教练
 
+### 前端代码库
 
+https://github.com/curtain-call/JavaEE_Class_Assignment_Frontend
 
 ### 功能模块
 

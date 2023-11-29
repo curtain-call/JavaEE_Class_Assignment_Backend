@@ -1,4 +1,4 @@
-package com.javaeeAsignment.ai_coach_backend;
+package com.javaeeAssignment.ai_coach_backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

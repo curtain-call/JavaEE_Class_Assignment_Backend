@@ -6,10 +6,12 @@ import com.javaeeAssignment.ai_coach_backend.model.User;
 import com.javaeeAssignment.ai_coach_backend.repository.TrainingPlanRepository;
 import com.javaeeAssignment.ai_coach_backend.repository.UserRepository;
 // import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TrainingPlanService {
@@ -20,7 +22,13 @@ public class TrainingPlanService {
     @Autowired
     private UserRepository userRepository;
 
+
     public TrainingPlanDto createTrainingPlan(TrainingPlanDto dto) {
+
+        if (dto.getEndDate().before(dto.getStartDate())) {
+            throw new IllegalArgumentException("End date cannot be before start date");
+        }
+
         TrainingPlan trainingPlan = new TrainingPlan();
         trainingPlan.setName(dto.getName());
         trainingPlan.setDescription(dto.getDescription());
@@ -67,6 +75,26 @@ public class TrainingPlanService {
             throw new EntityNotFoundException("Training Plan not found with id " + id);
         }
         trainingPlanRepository.deleteById(id);
+    }
+
+
+    public List<TrainingPlanDto> getTrainingPlansByUserId(Long userId) {
+        // 从仓库获取训练计划
+        List<TrainingPlan> trainingPlans = trainingPlanRepository.findByUserId(userId);
+
+        // 将实体列表转换为DTO列表
+        return trainingPlans.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    private TrainingPlanDto convertToDto(TrainingPlan trainingPlan) {
+        TrainingPlanDto dto = new TrainingPlanDto();
+        dto.setId(trainingPlan.getId());
+        dto.setName(trainingPlan.getName());
+        dto.setDescription(trainingPlan.getDescription());
+        // 根据需要添加其他字段的转换
+        return dto;
     }
 
 

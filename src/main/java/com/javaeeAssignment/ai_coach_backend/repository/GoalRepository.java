@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface GoalRepository extends JpaRepository<Goal, Long> {
-    // Custom query methods if needed
+    List<Goal> findByUserId(Long userId);
+    List<Goal> findByTrainingPlanId(Long trainingPlanId);
 }
+

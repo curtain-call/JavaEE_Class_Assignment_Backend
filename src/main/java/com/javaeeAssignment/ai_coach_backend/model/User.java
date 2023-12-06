@@ -1,6 +1,6 @@
 package com.javaeeAssignment.ai_coach_backend.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import java.util.Set;
 
@@ -25,6 +25,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<TrainingPlan> trainingPlans;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Goal> goals;
 
 
     public Long getId() {

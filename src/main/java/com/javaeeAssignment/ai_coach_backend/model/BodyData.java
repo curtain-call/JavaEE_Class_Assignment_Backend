@@ -1,6 +1,7 @@
 package com.javaeeAssignment.ai_coach_backend.model;
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "body_data")

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-// @EntityScan(basePackages = "com.javaeeAssignment.ai_coach_backend")
+@EntityScan(basePackages = "com.javaeeAssignment.ai_coach_backend")
 @EnableJpaRepositories(basePackages = "com.javaeeAssignment.ai_coach_backend.repository")
 public class AiCoachBackendApplication {
 

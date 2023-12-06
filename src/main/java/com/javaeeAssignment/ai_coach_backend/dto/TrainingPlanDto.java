@@ -1,13 +1,21 @@
 package com.javaeeAssignment.ai_coach_backend.dto;
 
+import java.util.Date;
+
 public class TrainingPlanDto {
     //训练计划的id，名称和描述
     private Long id;
     private String name;
     private String description;
 
-    //改训练计划属于哪个用户，通过userId关联
+    //训练计划的起始和终止日期
+    private Date startDate;
+    private Date endDate;
+
+    //该训练计划属于哪个用户，通过userId关联
     private Long userId;
+
+
 
     // Getters and Setters
     public Long getId() {
@@ -40,5 +48,13 @@ public class TrainingPlanDto {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
     }
 }

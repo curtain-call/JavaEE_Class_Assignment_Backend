@@ -2,52 +2,52 @@ package com.javaeeAssignment.ai_coach_backend.model;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 import java.util.Set;
 
 
 @Entity
-@NoArgsConstructor
 @Table(name = "user")
 public class User {
 
+    // account为登陆账号，且为user表primary_key
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private String account;
+    private String password;
     private String nickname;
 
-    private String username;
-    private String password;
+    // 关注、粉丝、获赞
+    private Long followerNum;
+    private Long fanNum;
+    private Long likeNum;
 
-    // Additional properties
-    private String email;
-    private int age;
+    @OneToMany
+    private List<BodyData> bodyDataList;
 
-    @OneToMany(mappedBy = "user")
-    private Set<TrainingPlan> trainingPlans;
+    @OneToMany
+    private List<TrainingPlan> trainingPlanList;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Goal> goals;
+    @OneToMany
+    private List<Motion> motionList;
 
+    // @OneToMany
+    // private List<SportReport> sportReportList;
+    //
+    // @OneToMany
+    // private List<FitnessReport> fitnessReportList;
+    //
+    // @OneToMany
+    // private List<RecommendationList> recommendationListList;
 
-    public Long getId() {
-        return id;
+    public String getAccount() {
+        return account;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
-    // Getter and setter methods for username
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    // Getter and setter methods for password
     public String getPassword() {
         return password;
     }
@@ -56,29 +56,83 @@ public class User {
         this.password = password;
     }
 
-    // Getter and setter methods for email
-    public String getEmail() {
-        return email;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    // Getter and setter methods for age
-    public int getAge() {
-        return age;
+    public Long getFollowerNum() {
+        return followerNum;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setFollowerNum(Long followerNum) {
+        this.followerNum = followerNum;
     }
 
-    public Set<TrainingPlan> getTrainingPlans() {
-        return trainingPlans;
+    public Long getFanNum() {
+        return fanNum;
     }
 
-    public void setTrainingPlans(Set<TrainingPlan> trainingPlans) {
-        this.trainingPlans = trainingPlans;
+    public void setFanNum(Long fanNum) {
+        this.fanNum = fanNum;
     }
+
+    public Long getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Long likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public List<BodyData> getBodyDataList() {
+        return bodyDataList;
+    }
+
+    public void setBodyDataList(List<BodyData> bodyDataList) {
+        this.bodyDataList = bodyDataList;
+    }
+
+    public List<TrainingPlan> getTrainingPlanList() {
+        return trainingPlanList;
+    }
+
+    public void setTrainingPlanList(List<TrainingPlan> trainingPlanList) {
+        this.trainingPlanList = trainingPlanList;
+    }
+
+    public List<Motion> getMotionList() {
+        return motionList;
+    }
+
+    public void setMotionList(List<Motion> motionList) {
+        this.motionList = motionList;
+    }
+
+    // public List<SportReport> getSportReportList() {
+    //     return sportReportList;
+    // }
+    //
+    // public void setSportReportList(List<SportReport> sportReportList) {
+    //     this.sportReportList = sportReportList;
+    // }
+    //
+    // public List<FitnessReport> getFitnessReportList() {
+    //     return fitnessReportList;
+    // }
+    //
+    // public void setFitnessReportList(List<FitnessReport> fitnessReportList) {
+    //     this.fitnessReportList = fitnessReportList;
+    // }
+    //
+    // public List<RecommendationList> getRecommendationListList() {
+    //     return recommendationListList;
+    // }
+    //
+    // public void setRecommendationListList(List<RecommendationList> recommendationListList) {
+    //     this.recommendationListList = recommendationListList;
+    // }
 }

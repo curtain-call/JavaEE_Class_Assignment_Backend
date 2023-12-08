@@ -3,6 +3,7 @@ package com.javaeeAssignment.ai_coach_backend.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,69 +13,53 @@ public class TrainingPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String description;
+    private String account;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    //训练计划的起始终止时间，应为TimeStamp
+    private Double startTime;
+    private Double endTime;
 
-    @OneToMany(mappedBy = "trainingPlan")
-    private Set<Goal> goals;
+    //训练计划单独的motion列表，应包含于user中的motionlist
+    @OneToMany
+    private List<Motion> motionList;
 
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
-
-    @Temporal(TemporalType.DATE)
-    private Date endDate;
-
-    // Getters
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    // Setters
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAccount() {
+        return account;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
-    public User getUser() {
-        return user;
+    public Double getStartTime() {
+        return startTime;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setStartTime(Double startTime) {
+        this.startTime = startTime;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Double getEndTime() {
+        return endTime;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setEndTime(Double endTime) {
+        this.endTime = endTime;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public List<Motion> getMotionList() {
+        return motionList;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setMotionList(List<Motion> motionList) {
+        this.motionList = motionList;
     }
 }

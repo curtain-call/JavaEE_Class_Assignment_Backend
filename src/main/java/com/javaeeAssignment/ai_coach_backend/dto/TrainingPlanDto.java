@@ -1,44 +1,61 @@
 package com.javaeeAssignment.ai_coach_backend.dto;
 
+import com.javaeeAssignment.ai_coach_backend.model.Motion;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+
+import java.util.Date;
+import java.util.List;
+
 public class TrainingPlanDto {
-    //训练计划的id，名称和描述
     private Long id;
-    private String name;
-    private String description;
 
-    //改训练计划属于哪个用户，通过userId关联
-    private Long userId;
+    private String account;
 
-    // Getters and Setters
+    //训练计划的起始终止时间，应为TimeStamp
+    private Double startTime;
+    private Double endTime;
+
+    //训练计划单独的motion列表，应包含于user中的motionlist
+    private List<Motion> motionList;
+
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAccount() {
+        return account;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Double getStartTime() {
+        return startTime;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setStartTime(Double startTime) {
+        this.startTime = startTime;
+    }
+
+    public Double getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Double endTime) {
+        this.endTime = endTime;
+    }
+
+    public List<Motion> getMotionList() {
+        return motionList;
+    }
+
+    public void setMotionList(List<Motion> motionList) {
+        this.motionList = motionList;
     }
 }

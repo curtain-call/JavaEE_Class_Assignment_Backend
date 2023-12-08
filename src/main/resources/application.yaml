@@ -4,10 +4,10 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/ai_keep?useSSL=false&autoReconnect=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/ai_keep?autoReconnect=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: mhe020415..
+    password: 2130000103054a
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher  #解决swagger 3与Spring boot的版本兼容问题

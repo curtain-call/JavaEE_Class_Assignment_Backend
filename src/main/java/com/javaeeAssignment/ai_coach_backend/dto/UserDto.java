@@ -1,32 +1,97 @@
 package com.javaeeAssignment.ai_coach_backend.dto;
 
+import com.javaeeAssignment.ai_coach_backend.model.BodyData;
+import com.javaeeAssignment.ai_coach_backend.model.Motion;
+import com.javaeeAssignment.ai_coach_backend.model.TrainingPlan;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
+
 public class UserDto {
-    private Long id;
-    private String username;
-    private String email;
+    private String account;
+    private String password;
+    private String nickname;
 
-    public void setId(Long id) {
-        this.id = id;
+    // 关注、粉丝、获赞
+    private Long followerNum;
+    private Long fanNum;
+    private Long likeNum;
+
+    private List<BodyData> bodyDataList;
+
+    private List<TrainingPlan> trainingPlanList;
+
+    private List<Motion> motionList;
+
+    public String getAccount() {
+        return account;
     }
 
-    public Long getId() {
-        return id;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getPassword() {
+        return password;
     }
 
-    public String getUsername() {
-        return username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setEmail(String emal) {
-        this.email = emal;
+    public String getNickname() {
+        return nickname;
     }
 
-    public String getEmail() {
-        return email;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
+    public Long getFollowerNum() {
+        return followerNum;
+    }
+
+    public void setFollowerNum(Long followerNum) {
+        this.followerNum = followerNum;
+    }
+
+    public Long getFanNum() {
+        return fanNum;
+    }
+
+    public void setFanNum(Long fanNum) {
+        this.fanNum = fanNum;
+    }
+
+    public Long getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Long likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public List<BodyData> getBodyDataList() {
+        return bodyDataList;
+    }
+
+    public void setBodyDataList(List<BodyData> bodyDataList) {
+        this.bodyDataList = bodyDataList;
+    }
+
+    public List<TrainingPlan> getTrainingPlanList() {
+        return trainingPlanList;
+    }
+
+    public void setTrainingPlanList(List<TrainingPlan> trainingPlanList) {
+        this.trainingPlanList = trainingPlanList;
+    }
+
+    public List<Motion> getMotionList() {
+        return motionList;
+    }
+
+    public void setMotionList(List<Motion> motionList) {
+        this.motionList = motionList;
+    }
 }

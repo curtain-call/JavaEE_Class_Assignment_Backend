@@ -20,7 +20,12 @@ public class TrainingPlan {
     private Double endTime;
 
     //训练计划单独的motion列表，应包含于user中的motionlist
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "training_plan_motion",
+            joinColumns = @JoinColumn(name = "training_plan_id"),
+            inverseJoinColumns = @JoinColumn(name = "motion_id")
+    )
     private List<Motion> motionList;
 
     public Long getId() {

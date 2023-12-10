@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TrainingPlanDto {
+
     private Long id;
 
     private String account;

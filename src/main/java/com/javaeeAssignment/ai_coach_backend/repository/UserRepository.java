@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 // @Mapper
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByUsername(String username);
+    User findByAccount(String account);
 
+    void deleteByAccount(String account);
 }

@@ -3,14 +3,16 @@ package com.javaeeAssignment.ai_coach_backend.dto;
 import com.javaeeAssignment.ai_coach_backend.model.BodyData;
 import com.javaeeAssignment.ai_coach_backend.model.Motion;
 import com.javaeeAssignment.ai_coach_backend.model.TrainingPlan;
-import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
 public class UserDto {
+
     private String account;
     private String password;
     private String nickname;
+
+    private String token; // 登录时返回的JWT令牌
 
     // 关注、粉丝、获赞
     private Long followerNum;

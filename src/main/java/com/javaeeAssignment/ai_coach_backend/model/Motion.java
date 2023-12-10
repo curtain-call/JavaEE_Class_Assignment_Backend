@@ -20,10 +20,10 @@ public class Motion {
 
     private Boolean status;
 
-    //标准视频、自传视频、视频封面该用什么文件定义？
-    // private File standardVideo;
-    // private File userUploadVideo;
-    // private File image;
+    // 标准视频、自传视频、视频封面该用什么文件定义？
+    private String standardVideoUrl;
+    private String userUploadVideoUrl;
+    private String imageUrl;
 
 
     public Long getId() {
@@ -64,5 +64,29 @@ public class Motion {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String getStandardVideoUrl() {
+        return standardVideoUrl;
+    }
+
+    public void setStandardVideoUrl(String standardVideoUrl) {
+        this.standardVideoUrl = standardVideoUrl;
+    }
+
+    public String getUserUploadVideoUrl() {
+        return userUploadVideoUrl;
+    }
+
+    public void setUserUploadVideoUrl(String userUploadVideoUrl) {
+        this.userUploadVideoUrl = userUploadVideoUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

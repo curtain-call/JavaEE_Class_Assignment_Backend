@@ -1,6 +1,7 @@
 package com.javaeeAssignment.ai_coach_backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public class User {
 
     // account为登陆账号，且为user表primary_key
     @Id
+    @NotNull
+    @Column(nullable = false, unique = true) // 确保字段非空且唯一
     private String account;
     private String password;
     private String nickname;
@@ -22,13 +25,18 @@ public class User {
     private Long fanNum;
     private Long likeNum;
 
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_account", referencedColumnName = "account")
     private List<BodyData> bodyDataList;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_account", referencedColumnName = "account")
     private List<TrainingPlan> trainingPlanList;
 
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_account", referencedColumnName = "account")
     private List<Motion> motionList;
 
     // @OneToMany

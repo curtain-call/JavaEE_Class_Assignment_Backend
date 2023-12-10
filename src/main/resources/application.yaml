@@ -7,15 +7,10 @@ spring:
     url: jdbc:mysql://localhost:3306/ai_keep?autoReconnect=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 2130000103054a
+    password: 2130000103054aB=
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher  #解决swagger 3与Spring boot的版本兼容问题
   main:
     allow-bean-definition-overriding:
       true
-#
-## 开启mp的日志（输出到控制台）
-#mybatis-plus:
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

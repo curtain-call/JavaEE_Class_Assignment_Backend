@@ -1,5 +1,6 @@
 package com.javaeeAssignment.ai_coach_backend.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 *   5. 按照当前运动量评估, 大概多久能够达到你的目标
 *
 * */
+@Entity
 public class FitnessReport {
 
     @Id

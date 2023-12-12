@@ -2,6 +2,8 @@ package com.javaeeAssignment.ai_coach_backend.controller;
 
 import com.javaeeAssignment.ai_coach_backend.dto.MotionDTO;
 import com.javaeeAssignment.ai_coach_backend.dto.TrainingPlanDTO;
+import com.javaeeAssignment.ai_coach_backend.model.Motion;
+import com.javaeeAssignment.ai_coach_backend.repository.MotionRepository;
 import com.javaeeAssignment.ai_coach_backend.service.MotionService;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
@@ -22,6 +24,8 @@ import java.util.List;
 @RequestMapping("/motions")
 @CrossOrigin
 public class MotionController {
+    @Autowired
+    private MotionRepository motionRepository;
 
     @Autowired
     private MotionService motionService;
@@ -57,10 +61,13 @@ public class MotionController {
             @RequestParam("id") Long id) throws IOException {
 
         try {
-            motionService.uploadVideo(userVideoFile);
+            String path = motionService.uploadVideo(userVideoFile);
 
             try {
                 MotionDTO motionDTO = motionService.findMotionById(id);
+                motionDTO.setUserUploadVideoUrl(path);
+                Motion motion = modelMapper.map(motionDTO, Motion.class);
+                motionRepository.save(motion);
                 return ResponseEntity.ok(motionDTO);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -70,6 +77,8 @@ public class MotionController {
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Failed to create motion");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }

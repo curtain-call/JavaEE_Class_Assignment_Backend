@@ -67,7 +67,7 @@ public class MotionService {
         String videoPath = uploadDirectory + File.separator + originalFileName;
 
         if(originalFileName.isEmpty()) {
-            throw new IOException("No image selected");
+            throw new IOException("No video selected");
         }
 
         // 保存视频文件到本地

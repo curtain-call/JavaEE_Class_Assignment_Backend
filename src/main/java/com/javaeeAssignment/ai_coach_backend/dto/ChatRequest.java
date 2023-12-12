@@ -1,4 +1,4 @@
-package com.javaeeAssignment.ai_coach_backend.model;
+package com.javaeeAssignment.ai_coach_backend.dto;
 
 public class ChatRequest {
 

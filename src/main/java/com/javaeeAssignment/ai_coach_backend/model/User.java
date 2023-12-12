@@ -39,17 +39,17 @@ public class User {
     @JoinColumn(name = "user_account", referencedColumnName = "account")
     private List<Motion> motionList;
 
-    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    // @JoinColumn(name = "user_account", referencedColumnName = "account")
-    // private List<SportReport> sportReportList;
-    //
-    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    // @JoinColumn(name = "user_account", referencedColumnName = "account")
-    // private List<FitnessReport> fitnessReportList;
-    //
-    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    // @JoinColumn(name = "user_account", referencedColumnName = "account")
-    // private List<RecommendationList> recommendationListList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_account", referencedColumnName = "account")
+    private List<SportReport> sportReportList;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_account", referencedColumnName = "account")
+    private List<FitnessReport> fitnessReportList;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_account", referencedColumnName = "account")
+    private List<RecommendationList> recommendationListList;
 
     public String getAccount() {
         return account;

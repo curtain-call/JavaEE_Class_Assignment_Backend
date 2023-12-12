@@ -1,8 +1,11 @@
 package com.javaeeAssignment.ai_coach_backend.dto;
 
-public class BodyDataDto {
+import jakarta.validation.constraints.NotNull;
+
+public class BodyDataDTO {
     private Long id;
 
+    @NotNull
     private String account;
 
     private Double weight;

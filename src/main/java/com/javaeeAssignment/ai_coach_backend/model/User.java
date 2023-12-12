@@ -20,7 +20,7 @@ public class User {
     private String password;
     private String nickname;
 
-    // 关注、粉丝、获赞
+
     private Long followerNum;
     private Long fanNum;
     private Long likeNum;
@@ -39,13 +39,16 @@ public class User {
     @JoinColumn(name = "user_account", referencedColumnName = "account")
     private List<Motion> motionList;
 
-    // @OneToMany
+    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JoinColumn(name = "user_account", referencedColumnName = "account")
     // private List<SportReport> sportReportList;
     //
-    // @OneToMany
+    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JoinColumn(name = "user_account", referencedColumnName = "account")
     // private List<FitnessReport> fitnessReportList;
     //
-    // @OneToMany
+    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JoinColumn(name = "user_account", referencedColumnName = "account")
     // private List<RecommendationList> recommendationListList;
 
     public String getAccount() {

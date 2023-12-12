@@ -6,18 +6,18 @@ import com.javaeeAssignment.ai_coach_backend.model.TrainingPlan;
 
 import java.util.List;
 
-public class UserDto {
+public class UserDTO {
 
     private String account;
     private String password;
     private String nickname;
 
-    private String token; // 登录时返回的JWT令牌
+    private String token = null; // 登录时返回的JWT令牌
 
     // 关注、粉丝、获赞
-    private Long followerNum;
-    private Long fanNum;
-    private Long likeNum;
+    private Long followerNum = 0L;
+    private Long fanNum = 0L;
+    private Long likeNum = 0L;
 
     private List<BodyData> bodyDataList;
 

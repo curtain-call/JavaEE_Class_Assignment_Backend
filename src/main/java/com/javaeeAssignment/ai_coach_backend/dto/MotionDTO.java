@@ -1,4 +1,4 @@
-package com.javaeeAssignment.ai_coach_backend.model;
+package com.javaeeAssignment.ai_coach_backend.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,8 +7,7 @@ import jakarta.persistence.Id;
 
 import java.io.File;
 
-@Entity
-public class Motion {
+public class MotionDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,14 +15,12 @@ public class Motion {
     private String account;
 
     private String name;
-    private String description;
+    private String description = null;
 
     private String standardVideoUrl;
     private String userUploadVideoUrl;
     private String standardVideoImageUrl;
     private String userUploadVideoImageUrl;
-
-
 
     public Long getId() {
         return id;

@@ -2,6 +2,7 @@ package com.javaeeAssignment.ai_coach_backend.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
@@ -14,6 +15,8 @@ public class BodyData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Column(nullable = false)
     private String account;
 
     private Double weight;

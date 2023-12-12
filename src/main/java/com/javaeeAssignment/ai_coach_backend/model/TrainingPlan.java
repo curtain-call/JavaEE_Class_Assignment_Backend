@@ -1,6 +1,7 @@
 package com.javaeeAssignment.ai_coach_backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.List;
@@ -13,9 +14,13 @@ public class TrainingPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Column(nullable = false)
     private String account;
 
-    //训练计划的起始终止时间，应为TimeStamp
+    /**
+     * @pa
+     */
     private Double startTime;
     private Double endTime;
 

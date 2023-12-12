@@ -1,7 +1,7 @@
 package com.javaeeAssignment.ai_coach_backend.service;
 
-import com.javaeeAssignment.ai_coach_backend.dto.ChatRequest;
-import com.javaeeAssignment.ai_coach_backend.dto.ChatResponse;
+import com.javaeeAssignment.ai_coach_backend.model.ChatRequest;
+import com.javaeeAssignment.ai_coach_backend.model.ChatResponse;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;

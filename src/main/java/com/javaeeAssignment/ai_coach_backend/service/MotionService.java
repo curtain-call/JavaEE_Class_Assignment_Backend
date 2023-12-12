@@ -31,18 +31,14 @@ public class MotionService {
     private ModelMapper modelMapper;
 
     @Transactional
-
     public MotionDTO createMotion(MultipartFile standardVideoFile,
-                               MultipartFile standardVideoImageFile,
                                String account, String name, String description) throws IOException {
         // 上传标准视频和用户上传视频
         String standardVideoUrl = uploadVideo(standardVideoFile);
-        // 上传标准视频和用户上传视频的图像
-        String standardVideoImageUrl = uploadImage(standardVideoImageFile);
+
         // 创建 Motion 对象并设置属性
         Motion motion = new Motion();
         motion.setStandardVideoUrl(standardVideoUrl);
-        motion.setStandardVideoImageUrl(standardVideoImageUrl);
         motion.setAccount(account);
         motion.setDescription(description);
         motion.setName(name);
@@ -133,14 +129,11 @@ public class MotionService {
         return resource;
     }
 
-
     public MotionDTO findMotionById(Long id) throws Exception {
-
         Optional<Motion> motionOptional = motionRepository.findById(id);
         if (!motionOptional.isPresent()) {
             throw new Exception("Motion not found with id: " + id);
         }
-
         return modelMapper.map(motionOptional.get(), MotionDTO.class);
     }
 
@@ -149,7 +142,6 @@ public class MotionService {
         return motionRepository.findByAccount(account).stream()
                 .map(motion -> modelMapper.map(motion, MotionDTO.class))
                 .collect(Collectors.toList());
-
     }
 
 }

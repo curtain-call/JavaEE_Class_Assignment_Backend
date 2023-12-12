@@ -1,6 +1,6 @@
 package com.javaeeAssignment.ai_coach_backend.controller;
 
-import com.javaeeAssignment.ai_coach_backend.dto.ChatRequest;
+import com.javaeeAssignment.ai_coach_backend.model.ChatRequest;
 import com.javaeeAssignment.ai_coach_backend.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

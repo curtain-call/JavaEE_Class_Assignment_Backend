@@ -32,7 +32,7 @@ public class BodyDataController {
     }
 
     @ApiOperation("根据account获取所有身体数据")
-    @GetMapping
+    @GetMapping("/{account}")
     public ResponseEntity<List<BodyDataDTO>> getAllBodyDataForAccount(@RequestParam String account) {
         List<BodyDataDTO> bodyDataList = bodyDataService.getAllBodyDataForAccount(account);
         return ResponseEntity.ok(bodyDataList);

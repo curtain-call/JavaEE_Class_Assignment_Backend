@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.util.List;
 
 @RestController
@@ -31,25 +29,21 @@ public class MotionController {
     @Autowired
     private ModelMapper modelMapper;
 
-
     @ApiOperation("创建Motion")
     @PostMapping("/createMotion")
     public ResponseEntity<?> createMotion(
             @RequestParam("standardVideoFile") MultipartFile standardVideoFile,
-            @RequestParam("standardVideoImageFile") MultipartFile standardVideoImageFile,
             @RequestParam("account") String account,
             @RequestParam("name") String name,
             @RequestParam("description") String description) {
         try {
             MotionDTO motionDTO = motionService.createMotion(
                     standardVideoFile,
-                    standardVideoImageFile,
                     account,
                     name,
                     description);
 
             return ResponseEntity.ok(motionDTO);
-
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Failed to create motion");
@@ -60,12 +54,10 @@ public class MotionController {
     @PostMapping("/uploadUserVideo")
     public ResponseEntity<?> uploadUserVideo(
             @RequestParam("userVideoFile") MultipartFile userVideoFile,
-            @RequestParam("userVideoImageFile") MultipartFile userVideoImageFile,
             @RequestParam("id") Long id) throws IOException {
 
         try {
             motionService.uploadVideo(userVideoFile);
-            motionService.uploadImage(userVideoImageFile);
 
             try {
                 MotionDTO motionDTO = motionService.findMotionById(id);
@@ -88,7 +80,6 @@ public class MotionController {
     public ResponseEntity<MotionDTO> getMotion(@RequestParam Long id) {
         try {
             MotionDTO motionDTO = motionService.findMotionById(id);
-
             return ResponseEntity.ok(motionDTO);
         } catch (Exception e) {
             e.printStackTrace();

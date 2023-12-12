@@ -7,7 +7,7 @@ spring:
     url: jdbc:mysql://localhost:3306/ai_keep?autoReconnect=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 2130000103054aB=
+    password: mhe020415..
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher  #解决swagger 3与Spring boot的版本兼容问题

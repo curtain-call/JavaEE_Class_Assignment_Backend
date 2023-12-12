@@ -17,10 +17,12 @@ public class MotionDTO {
     private String name;
     private String description = null;
 
-    private String standardVideoUrl;
-    private String userUploadVideoUrl;
-    private String standardVideoImageUrl;
-    private String userUploadVideoImageUrl;
+    private String standardVideoUrl = null;
+    private String standardVideoImageUrl = null;
+
+    private String userUploadVideoUrl = null;
+    private String userUploadVideoImageUrl = null;
+
 
     public Long getId() {
         return id;

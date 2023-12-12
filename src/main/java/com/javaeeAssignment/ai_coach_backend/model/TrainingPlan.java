@@ -18,9 +18,6 @@ public class TrainingPlan {
     @Column(nullable = false)
     private String account;
 
-    /**
-     * @pa
-     */
     private Double startTime;
     private Double endTime;
 

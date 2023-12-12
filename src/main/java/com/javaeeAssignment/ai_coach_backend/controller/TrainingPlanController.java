@@ -31,7 +31,7 @@ public class TrainingPlanController {
     }
 
     @ApiOperation("根据account获取用户训练计划列表")
-    @GetMapping
+    @GetMapping("/{account}")
     public ResponseEntity<List<TrainingPlanDTO>> getTrainingPlansByAccount(@PathVariable String account) {
         List<TrainingPlanDTO> plans = trainingPlanService.getTrainingPlansByAccount(account);
         return ResponseEntity.ok(plans);

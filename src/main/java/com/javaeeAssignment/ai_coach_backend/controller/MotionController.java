@@ -1,14 +1,12 @@
 package com.javaeeAssignment.ai_coach_backend.controller;
 
 import com.javaeeAssignment.ai_coach_backend.dto.MotionDTO;
-import com.javaeeAssignment.ai_coach_backend.model.Motion;
+import com.javaeeAssignment.ai_coach_backend.dto.TrainingPlanDTO;
 import com.javaeeAssignment.ai_coach_backend.service.MotionService;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -32,34 +29,61 @@ public class MotionController {
     @Autowired
     private ModelMapper modelMapper;
 
-
+    @ApiOperation("创建Motion")
     @PostMapping("/createMotion")
     public ResponseEntity<?> createMotion(
             @RequestParam("standardVideoFile") MultipartFile standardVideoFile,
-            @RequestParam("userUploadVideoFile") MultipartFile userUploadVideoFile,
             @RequestParam("standardVideoImageFile") MultipartFile standardVideoImageFile,
-            @RequestParam("userUploadVideoImageFile") MultipartFile userUploadVideoImageFile,
-            @RequestBody MotionDTO motionDTO) {
+            @RequestParam("account") String account,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description) {
         try {
-            MotionDTO motionDTO1 = motionService.createMotion(
+            MotionDTO motionDTO = motionService.createMotion(
                     standardVideoFile,
-                    userUploadVideoFile,
                     standardVideoImageFile,
-                    userUploadVideoImageFile,
-                    motionDTO);
+                    account,
+                    name,
+                    description);
 
-            return ResponseEntity.ok(motionDTO1);
+            return ResponseEntity.ok(motionDTO);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Failed to create motion");
         }
     }
 
+    @ApiOperation("上传用户运动视频")
+    @PostMapping("/uploadUserVideo")
+    public ResponseEntity<?> uploadUserVideo(
+            @RequestParam("userVideoFile") MultipartFile userVideoFile,
+            @RequestParam("userVideoImageFile") MultipartFile userVideoImageFile,
+            @RequestParam("id") Long id) throws IOException {
+
+        try {
+            motionService.uploadVideo(userVideoFile);
+            motionService.uploadImage(userVideoImageFile);
+
+            try {
+                MotionDTO motionDTO = motionService.findMotionById(id);
+                return ResponseEntity.ok(motionDTO);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to create motion");
+        }
+
+    }
+
+
+    @ApiOperation("根据id获取Motion")
     @GetMapping("/getMotion")
     public ResponseEntity<MotionDTO> getMotion(@RequestParam Long id) {
         try {
-            Motion motion = motionService.findMotionById(id);
-            MotionDTO motionDTO = modelMapper.map(motion, MotionDTO.class);
+            MotionDTO motionDTO = motionService.findMotionById(id);
             return ResponseEntity.ok(motionDTO);
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,6 +91,14 @@ public class MotionController {
         }
     }
 
+    @ApiOperation("根据account获取用户Motion列表")
+    @GetMapping("/{account}")
+    public ResponseEntity<List<MotionDTO>> getTrainingPlansByAccount(@PathVariable String account) {
+        List<MotionDTO> motions = motionService.getMotionsByAccount(account);
+        return ResponseEntity.ok(motions);
+    }
+
+    @ApiOperation("获取文件资源")
     @GetMapping("/getMotionResource")
     public ResponseEntity<Resource> getMotionResource(@RequestParam Long id, @RequestParam String account, @RequestParam String url) {
         try {

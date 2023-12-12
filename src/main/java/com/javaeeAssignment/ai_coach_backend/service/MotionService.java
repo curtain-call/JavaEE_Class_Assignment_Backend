@@ -31,26 +31,21 @@ public class MotionService {
     private ModelMapper modelMapper;
 
     @Transactional
-    public MotionDTO createMotion(MultipartFile standardVideoFile, MultipartFile userUploadVideoFile,
-                               MultipartFile standardVideoImageFile, MultipartFile userUploadVideoImageFile,
-                               MotionDTO motionDTO) throws IOException {
+    public MotionDTO createMotion(MultipartFile standardVideoFile,
+                               MultipartFile standardVideoImageFile,
+                               String account, String name, String description) throws IOException {
         // 上传标准视频和用户上传视频
         String standardVideoUrl = uploadVideo(standardVideoFile);
-        String userUploadVideoUrl = uploadVideo(userUploadVideoFile);
-
         // 上传标准视频和用户上传视频的图像
         String standardVideoImageUrl = uploadImage(standardVideoImageFile);
-        String userUploadVideoImageUrl = uploadImage(userUploadVideoImageFile);
 
         // 创建 Motion 对象并设置属性
         Motion motion = new Motion();
         motion.setStandardVideoUrl(standardVideoUrl);
-        motion.setUserUploadVideoUrl(userUploadVideoUrl);
         motion.setStandardVideoImageUrl(standardVideoImageUrl);
-        motion.setUserUploadVideoImageUrl(userUploadVideoImageUrl);
-        motion.setAccount(motionDTO.getAccount());
-        motion.setDescription(motionDTO.getDescription());
-        motion.setName(motionDTO.getName());
+        motion.setAccount(account);
+        motion.setDescription(description);
+        motion.setName(name);
 
         // 保存 Motion 对象到数据库
         motionRepository.save(motion);
@@ -74,6 +69,10 @@ public class MotionService {
 
         // 生成文件保存路径
         String videoPath = uploadDirectory + File.separator + originalFileName;
+
+        if(originalFileName.isEmpty()) {
+            throw new IOException("No image selected");
+        }
 
         // 保存视频文件到本地
         File file = new File(videoPath);
@@ -99,6 +98,10 @@ public class MotionService {
 
         // 生成文件保存路径
         String imagePath = uploadDirectory + File.separator + originalFileName;
+
+        if(imagePath.equals(uploadDirectory)) {
+            throw new IOException("No image selected");
+        }
 
         // 保存视频文件到本地
         File file = new File(imagePath);
@@ -130,12 +133,19 @@ public class MotionService {
         return resource;
     }
 
-    public Motion findMotionById(Long id) throws Exception {
+    public MotionDTO findMotionById(Long id) throws Exception {
         Optional<Motion> motionOptional = motionRepository.findById(id);
         if (!motionOptional.isPresent()) {
             throw new Exception("Motion not found with id: " + id);
         }
-        return motionOptional.get();
+        return modelMapper.map(motionOptional.get(), MotionDTO.class);
+    }
+
+    public List<MotionDTO> getMotionsByAccount(String account) {
+        // 只返回与用户账号相关的Motion
+        return motionRepository.findByAccount(account).stream()
+                .map(motion -> modelMapper.map(motion, MotionDTO.class))
+                .collect(Collectors.toList());
     }
 
 }

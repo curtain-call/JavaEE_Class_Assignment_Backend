@@ -23,6 +23,7 @@ public class MotionDTO {
     private String userUploadVideoUrl = null;
     private String userUploadVideoImageUrl = null;
 
+
     public Long getId() {
         return id;
     }

@@ -30,7 +30,9 @@ public class UserService {
         User user = new User();
         user.setAccount(userDto.getAccount());
         user.setPassword(userDto.getPassword()); // 加密密码
+
         user.setNickname(userDto.getNickname());
+
 
         user.setFollowerNum(userDto.getFollowerNum() != null ? userDto.getFollowerNum() : 0);
         user.setFanNum(userDto.getFanNum() != null ? userDto.getFanNum() : 0);

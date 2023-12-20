@@ -1,5 +1,16 @@
 ## AI 健身教练
 
+### 分工
+
+毛子昊: 
+   1.  OpenPose人体姿态估计静态算法（角度、加速度计）编写
+   2.  OpenAI API调用模块实现，模型fine-tune尝试，incontext-learning model实现
+   3.  算法接口设计与实现（process builder、 chat controller）
+   4.  部分前端内容展示实现
+
+
+
+
 ### 前端代码库
 
 https://github.com/curtain-call/JavaEE_Class_Assignment_Frontend

@@ -18,11 +18,8 @@ public class MotionDTO {
     private String description = null;
 
     private String standardVideoUrl = null;
-    private String standardVideoImageUrl = null;
 
     private String userUploadVideoUrl = null;
-    private String userUploadVideoImageUrl = null;
-
 
     public Long getId() {
         return id;
@@ -72,19 +69,4 @@ public class MotionDTO {
         this.userUploadVideoUrl = userUploadVideoUrl;
     }
 
-    public String getStandardVideoImageUrl() {
-        return standardVideoImageUrl;
-    }
-
-    public void setStandardVideoImageUrl(String standardVideoImageUrl) {
-        this.standardVideoImageUrl = standardVideoImageUrl;
-    }
-
-    public String getUserUploadVideoImageUrl() {
-        return userUploadVideoImageUrl;
-    }
-
-    public void setUserUploadVideoImageUrl(String userUploadVideoImageUrl) {
-        this.userUploadVideoImageUrl = userUploadVideoImageUrl;
-    }
 }

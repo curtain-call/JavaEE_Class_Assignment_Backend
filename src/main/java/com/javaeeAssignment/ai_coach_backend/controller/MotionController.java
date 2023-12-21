@@ -2,12 +2,13 @@ package com.javaeeAssignment.ai_coach_backend.controller;
 
 import com.javaeeAssignment.ai_coach_backend.dto.MotionDTO;
 import com.javaeeAssignment.ai_coach_backend.dto.TrainingPlanDTO;
+import com.javaeeAssignment.ai_coach_backend.model.Motion;
+import com.javaeeAssignment.ai_coach_backend.repository.MotionRepository;
 import com.javaeeAssignment.ai_coach_backend.service.MotionService;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/motions")
 @CrossOrigin
 public class MotionController {
+    @Autowired
+    private MotionRepository motionRepository;
 
     @Autowired
     private MotionService motionService;
@@ -31,25 +33,21 @@ public class MotionController {
     @Autowired
     private ModelMapper modelMapper;
 
-
     @ApiOperation("创建Motion")
     @PostMapping("/createMotion")
     public ResponseEntity<?> createMotion(
             @RequestParam("standardVideoFile") MultipartFile standardVideoFile,
-            @RequestParam("standardVideoImageFile") MultipartFile standardVideoImageFile,
             @RequestParam("account") String account,
             @RequestParam("name") String name,
             @RequestParam("description") String description) {
         try {
             MotionDTO motionDTO = motionService.createMotion(
                     standardVideoFile,
-                    standardVideoImageFile,
                     account,
                     name,
                     description);
 
             return ResponseEntity.ok(motionDTO);
-
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Failed to create motion");
@@ -60,15 +58,16 @@ public class MotionController {
     @PostMapping("/uploadUserVideo")
     public ResponseEntity<?> uploadUserVideo(
             @RequestParam("userVideoFile") MultipartFile userVideoFile,
-            @RequestParam("userVideoImageFile") MultipartFile userVideoImageFile,
             @RequestParam("id") Long id) throws IOException {
 
         try {
-            motionService.uploadVideo(userVideoFile);
-            motionService.uploadImage(userVideoImageFile);
+            String path = motionService.uploadVideo(userVideoFile);
 
             try {
                 MotionDTO motionDTO = motionService.findMotionById(id);
+                motionDTO.setUserUploadVideoUrl(path);
+                Motion motion = modelMapper.map(motionDTO, Motion.class);
+                motionRepository.save(motion);
                 return ResponseEntity.ok(motionDTO);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -78,6 +77,8 @@ public class MotionController {
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Failed to create motion");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -88,7 +89,6 @@ public class MotionController {
     public ResponseEntity<MotionDTO> getMotion(@RequestParam Long id) {
         try {
             MotionDTO motionDTO = motionService.findMotionById(id);
-
             return ResponseEntity.ok(motionDTO);
         } catch (Exception e) {
             e.printStackTrace();

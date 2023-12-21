@@ -1,23 +1,13 @@
-package com.javaeeAssignment.ai_coach_backend.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.javaeeAssignment.ai_coach_backend.dto;
 
 import java.util.List;
 
-@Entity
-public class SportReport {
+public class SportReportDTO {
     //时长、消耗卡路里、累计天数、最大连续天数、自己上传的userVideo、图片列表、
     // List<String> 问题列表
     // List<String> 建议列表
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-
-
-    private String account;
 
     private Double calorie;
     private Long sumDays;
@@ -35,14 +25,6 @@ public class SportReport {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
     }
 
     public Double getCalorie() {

@@ -20,8 +20,6 @@ public class Motion {
 
     private String standardVideoUrl;
     private String userUploadVideoUrl;
-    private String standardVideoImageUrl;
-    private String userUploadVideoImageUrl;
 
 
 
@@ -73,19 +71,4 @@ public class Motion {
         this.userUploadVideoUrl = userUploadVideoUrl;
     }
 
-    public String getStandardVideoImageUrl() {
-        return standardVideoImageUrl;
-    }
-
-    public void setStandardVideoImageUrl(String standardVideoImageUrl) {
-        this.standardVideoImageUrl = standardVideoImageUrl;
-    }
-
-    public String getUserUploadVideoImageUrl() {
-        return userUploadVideoImageUrl;
-    }
-
-    public void setUserUploadVideoImageUrl(String userUploadVideoImageUrl) {
-        this.userUploadVideoImageUrl = userUploadVideoImageUrl;
-    }
 }

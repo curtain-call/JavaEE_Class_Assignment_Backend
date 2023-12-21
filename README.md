@@ -8,6 +8,12 @@
    3.  算法接口设计与实现（process builder、 chat controller）
    4.  部分前端内容展示实现
 
+明浩恩：
+   1. 后端功能代码的实现
+   2. 数据库设计
+   3. 使用ApiFox进行Api接口测试
+   
+
 
 
 
